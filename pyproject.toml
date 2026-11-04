@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metad-llm"
+version = "0.1.0"
+description = "Metacognitive sensitivity (meta-d', M-ratio) and calibration metrics for language model confidence"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Kishore Nuthalapati" }]
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.22", "scipy>=1.8"]
+keywords = ["calibration", "metacognition", "signal detection theory", "meta-d", "llm", "uncertainty"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.5"]
+dev = ["pytest>=7", "matplotlib>=3.5"]
+
+[project.scripts]
+metad-llm = "metad_llm.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
