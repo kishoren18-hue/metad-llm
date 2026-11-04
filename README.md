@@ -1,5 +1,7 @@
 # metad-llm
 
+[![tests](https://github.com/kishoren18-hue/metad-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/kishoren18-hue/metad-llm/actions/workflows/ci.yml) [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **Metacognition metrics from cognitive neuroscience, applied to language model confidence.**
 
 Most LLM calibration work reports Expected Calibration Error (ECE) and Brier score. Those tell you whether a model's confidence *matches its accuracy on average*. They do not tell you whether the model's confidence actually *separates its right answers from its wrong ones*, which is the property you need if you want to trust a high-confidence answer or flag a low-confidence one.
