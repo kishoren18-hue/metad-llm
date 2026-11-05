@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "metad-llm"
-version = "0.1.0"
+version = "0.2.0"
 description = "Metacognitive sensitivity (meta-d', M-ratio) and calibration metrics for language model confidence"
 readme = "README.md"
 license = { text = "MIT" }
@@ -18,15 +18,37 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 
+[project.urls]
+Homepage = "https://github.com/kishoren18-hue/metad-llm"
+Issues = "https://github.com/kishoren18-hue/metad-llm/issues"
+Changelog = "https://github.com/kishoren18-hue/metad-llm/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
 plot = ["matplotlib>=3.5"]
-dev = ["pytest>=7", "matplotlib>=3.5"]
+dev = ["pytest>=7", "matplotlib>=3.5", "ruff>=0.6", "pytest-cov>=5", "pre-commit>=3"]
 
 [project.scripts]
 metad-llm = "metad_llm.cli:main"
+
+[tool.setuptools.package-data]
+metad_llm = ["py.typed"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["E731", "E501"]  # long lines are mostly HTML templates
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"scripts/*" = ["E402"]
+"examples/*" = ["E402"]
+"benchmarks/*" = ["E402"]

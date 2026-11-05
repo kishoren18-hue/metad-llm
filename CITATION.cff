@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "metad-llm: metacognition metrics for language model confidence"
+abstract: "Meta-d', M-ratio and calibration metrics from cognitive neuroscience applied to language model confidence, with paired bootstrap comparison of models."
+type: software
+authors:
+  - family-names: Nuthalapati
+    given-names: Kishore
+repository-code: "https://github.com/kishoren18-hue/metad-llm"
+license: MIT
+version: 0.2.0
+date-released: "2026-11-04"
+keywords:
+  - calibration
+  - metacognition
+  - signal detection theory
+  - language models
+  - uncertainty

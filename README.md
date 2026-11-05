@@ -77,6 +77,24 @@ Any of these work as the `confidence` column:
 
 Different confidence sources on the same model often give very different meta-d'. Comparing them is one of the more interesting things to do with this package.
 
+For logprobs, `confidence_from_logprobs({"A": -0.1, "B": -2.5, "C": -3.0})` normalizes over the answer options and returns `("A", 0.86)`.
+
+## Comparing two models (or two confidence methods)
+
+A single meta-d' number has wide error bars. To claim one model has better metacognition than another, compare them on the same items with a paired bootstrap:
+
+```bash
+metad-llm compare model_a.jsonl model_b.jsonl --boot 1000
+```
+
+```python
+from metad_llm import compare
+res = compare(correct_a, conf_a, correct_b, conf_b, n_boot=1000)
+print(res)
+```
+
+Runs are joined on `id`. For each metric you get A, B, the difference, a 95% confidence interval for the difference, a two-sided p-value, and a verdict ("A", "B", or "no clear difference" when the interval includes zero). Because both models are resampled on the same questions, question difficulty cancels out and much smaller differences become detectable than when comparing two separate reports.
+
 ## What's implemented
 
 | Function | What it does |
@@ -86,6 +104,8 @@ Different confidence sources on the same model often give very different meta-d'
 | `assess`, `assess_binary` | Full report: accuracy, ECE, adaptive ECE, Brier, type-2 AUROC, d', meta-d', M-ratio, bootstrap CIs |
 | `bin_confidence` | Equal-count binning of continuous confidence with tie handling |
 | `counts_from_trials`, `counts_from_correctness` | Convert per-trial data into rating counts |
+| `compare` | Paired bootstrap comparison of two runs: differences, CIs and p-values for accuracy, ECE, Brier, type-2 AUROC, meta-d' and M-ratio |
+| `confidence_from_logprobs` | Option-normalized confidence from token log-probabilities |
 | `simulate_observer` | Simulated SDT observers with known d' and adjustable metacognitive noise |
 
 The test suite checks that the fit recovers known parameters: an ideal simulated observer gives an M-ratio within 0.08 of 1, and adding noise only to the confidence pathway lowers meta-d' while leaving d' unchanged.
@@ -107,6 +127,10 @@ I'm interested in cognitive neuroscience and do research on calibration in langu
 * Fleming, S. M., & Lau, H. C. (2014). How to measure metacognition. *Frontiers in Human Neuroscience*, 8, 443.
 * Fleming, S. M. (2017). HMeta-d: hierarchical Bayesian estimation of metacognitive efficiency from confidence ratings. *Neuroscience of Consciousness*, 2017(1).
 * Guo, C., Pleiss, G., Sun, Y., & Weinberger, K. Q. (2017). On calibration of modern neural networks. *ICML*.
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and ideas to start with, [CHANGELOG.md](CHANGELOG.md) for what's new, and [SECURITY.md](SECURITY.md) to report a problem privately. If you use this in research, GitHub's "Cite this repository" button (from [CITATION.cff](CITATION.cff)) gives a ready-made citation.
 
 ## License
 
