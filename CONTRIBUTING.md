@@ -30,6 +30,8 @@ Good tests matter more than clever code here. A bug fix should come with a test 
 
 ## Ideas to start with
 
+Issues labeled [good first issue](https://github.com/kishoren18-hue/metad-llm/labels/good%20first%20issue) are scoped for a first pull request, with the files to touch and what "done" means. Other ideas:
+
 * Add the unequal-variance SDT model (s != 1)
 * Add response-specific meta-d' (separate fits for S1 and S2 responses)
 * A Colab notebook that evaluates an open model end to end
